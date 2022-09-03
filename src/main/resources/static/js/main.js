@@ -162,16 +162,37 @@ Vue.component('books-list', {
     }
 });
 
+// var app = new Vue({
+//     // # - css selector, id
+//     el: '#app',
+//     // разметка
+//     template: '<books-list :books="books" />',
+//     //обьект ключ-значение, отображает данные
+//     data: {
+//         books: []
+//     }
+// });
+// frontendData.books = undefined;
 var app = new Vue({
-    // # - css selector, id
     el: '#app',
-    // разметка
-    template: '<books-list :books="books" />',
-    //обьект ключ-значение, отображает данные
+    template:
+        '<div>' +
+        '<div v-if="!profile">Необходимо <a href="/login">авторизоваться</a></div>' +
+        '<div v-else >' +
+        '<div>{{profile.name}}&nbsp;<a href="/logout">LogOut</div>' +
+        '<books-list :books="books" />' +
+        '</div>' +
+        '</div>',
     data: {
+        // messages: frontendData.books,
+        // profile: frontendData.profile,
         books: []
     }
+//     created: function() {
+// //      messageApi.get().then(result =>
+// //          result.json().then(data =>
+// //              data.forEach(message => this.messages.push(message))
+// //          )
+// //      )
+//     },
 });
-
-//<!-- Динамическое присвоение значения переменной. -->
-// <blog-post v-bind:comment-ids="post.commentIds"></blog-post>
