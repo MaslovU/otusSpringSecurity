@@ -40,3 +40,11 @@ CREATE TABLE book_authors(
     author_id  bigint REFERENCES authors(id) ON UPDATE CASCADE,
     CONSTRAINT book_authors_pkey PRIMARY KEY (book_id, author_id)
 );
+
+CREATE TABLE usr (
+     id bigserial,
+     name varchar(255),
+     password varchar(255),
+     active boolean default false,
+     PRIMARY KEY (id)
+);
