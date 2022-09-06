@@ -1,5 +1,6 @@
 package com.maslov.securityhomework.config;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,24 +15,27 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @Slf4j
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
+//    @Autowired
+    private final DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .antMatcher("/**")
                 .authorizeRequests()
-                    .mvcMatchers("/").permitAll()
+                    .antMatchers("/", "/js/**", "/error**", "/login**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .permitAll()
                 .and()
                     .logout()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .csrf().disable();
     }
 
     @Override

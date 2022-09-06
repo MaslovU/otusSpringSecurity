@@ -137,13 +137,7 @@ Vue.component('books-list', {
             ':editMethod="editMethod" :books="books"/>' +
         '</div>',
     // инициализация коллекции данными, когда отображается список книг
-    created: function () {
-        bookApi.get().then(result =>
-            result.json().then(data =>
-                data.forEach(book => this.books.push(book))
-            )
-        )
-    },
+
     methods: {
         editMethod: function (book) {
             var authors = [];
@@ -162,37 +156,25 @@ Vue.component('books-list', {
     }
 });
 
-// var app = new Vue({
-//     // # - css selector, id
-//     el: '#app',
-//     // разметка
-//     template: '<books-list :books="books" />',
-//     //обьект ключ-значение, отображает данные
-//     data: {
-//         books: []
-//     }
-// });
-// frontendData.books = undefined;
 var app = new Vue({
     el: '#app',
     template:
         '<div>' +
-        '<div v-if="!profile">Необходимо <a href="/login">авторизоваться</a></div>' +
-        '<div v-else >' +
-        '<div>{{profile.name}}&nbsp;<a href="/logout">LogOut</div>' +
-        '<books-list :books="books" />' +
-        '</div>' +
+            '<div v-if="!profile">Необходимо <a href="/login">авторизоваться</a></div>' +
+            '<template>' +
+                '<books-list v-else :books="books" />' +
+                '<div>{{profile.name}}&nbsp;<a href="/logout">LogOut</a></div>' +
+            '</template>' +
         '</div>',
     data: {
-        // messages: frontendData.books,
-        // profile: frontendData.profile,
-        books: []
+        books: frontendData.books,
+        profile: frontendData.profile
+    },
+    created: function () {
+        bookApi.get().then(result =>
+            result.json().then(data =>
+                data.forEach(book => this.books.push(book))
+            )
+        )
     }
-//     created: function() {
-// //      messageApi.get().then(result =>
-// //          result.json().then(data =>
-// //              data.forEach(message => this.messages.push(message))
-// //          )
-// //      )
-//     },
 });
