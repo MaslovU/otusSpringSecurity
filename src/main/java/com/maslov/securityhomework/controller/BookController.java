@@ -1,11 +1,9 @@
 package com.maslov.securityhomework.controller;
 
-import com.maslov.securityhomework.domain.Author;
 import com.maslov.securityhomework.domain.Book;
 import com.maslov.securityhomework.domain.Comment;
 import com.maslov.securityhomework.model.BookModel;
 import com.maslov.securityhomework.service.BookService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,12 +28,17 @@ public class BookController {
         this.bookService = service;
     }
 
-    @GetMapping
+    @GetMapping("/")
+    public String greeting(Model model) {
+        return "index";
+    }
+
+    @GetMapping("main")
     public String list(Model model) {
         Iterable<Book> books = bookService.getAllBook();
 
         model.addAttribute("books", books);
-        return "index";
+        return "main";
     }
 
     @GetMapping("books/onebook")
@@ -70,7 +72,7 @@ public class BookController {
 
         List<Book> books = bookService.getAllBook();
         model.addAttribute("books", books);
-        return "index";
+        return "main";
     }
 
     @PutMapping("books/{id}")

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RestApplic</title>
+</head>
+<body>
+    <h3>Books</h3>
+    <div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div>
+        <form method="post" action="createBook">
+            <label>
+                <input type="text" name="name" placeholder="Input name of book">
+            </label>
+            <label>
+                <input type="text" name="authors" placeholder="Input authors">
+            </label>
+            <label>
+                <input type="text" name="year" placeholder="Input year of publish">
+            </label>
+            <label>
+                <input type="text" name="genre" placeholder="Input genre of book">
+            </label>
+            <label>
+                <input type="text" name="listOfComments" placeholder="Input comments">
+            </label>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <button type="submit">Save book</button>
+        </form>
+    </div>
+    <div>List of books</div>
+    {{#books}}
+        <div>
+            <b>{{id}}</b>
+            <span>{{name}}</span>
+            <span>{{#authors}}
+                    {{name}}
+                  {{/authors}}</span>
+            <span>{{year.getDateOfPublish}}</span>
+            <span>{{genre.getName}}</span>
+            <span>{{#listOfComments}}
+                    {{commentForBook}}
+                  {{/listOfComments}}</span>
+        </div>
+    {{/books}}
+</body>
+</html>
