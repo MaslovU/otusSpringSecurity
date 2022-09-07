@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Service
 @Builder
-public class UserDO {
+public class UserDo {
     private String name;
     private String password;
     private boolean active;
