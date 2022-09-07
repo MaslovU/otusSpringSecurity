@@ -4,6 +4,7 @@ import com.maslov.securityhomework.domain.Book;
 import com.maslov.securityhomework.domain.Comment;
 import com.maslov.securityhomework.model.BookModel;
 import com.maslov.securityhomework.service.BookService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -75,10 +76,20 @@ public class BookController {
         return "main";
     }
 
+    @GetMapping("edit")
+    public String updateBook(Model model) {
+        return "edit";
+    }
+
     @PutMapping("books/{id}")
     public Book updateBook(@PathVariable("id") Book bookFromDB,
                            @RequestBody BookModel bookModel) {
         return bookService.updateBook(bookModel, bookFromDB);
+    }
+
+    @GetMapping("delete")
+    public String delEmployee(Model model) {
+        return "delete";
     }
 
     @DeleteMapping("books/{id}")

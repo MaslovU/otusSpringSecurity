@@ -38,14 +38,32 @@
         <div>
             <b>{{id}}</b>
             <span>{{name}}</span>
-            <span>{{#authors}}
+            <span>
+                {{#authors}}
                     {{name}}
-                  {{/authors}}</span>
-            <span>{{year.getDateOfPublish}}</span>
-            <span>{{genre.getName}}</span>
-            <span>{{#listOfComments}}
+                {{/authors}}
+            </span>
+            <span>
+                {{year.getDateOfPublish}}
+            </span>
+            <span>
+                {{genre.getName}}
+            </span>
+            <span>
+                {{#listOfComments}}
                     {{commentForBook}}
-                  {{/listOfComments}}</span>
+                {{/listOfComments}}
+            </span>
+            <span style="position: absolute; right: 900px">
+                 <form action="/edit" method="get">
+                    <input type="submit" value="Edit"/>
+                </form>
+            </span>
+            <span style="position: absolute; right: 800px">
+                <form action="/delete" method="get">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </span>
         </div>
     {{/books}}
 </body>
