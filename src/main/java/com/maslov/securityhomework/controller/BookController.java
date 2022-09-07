@@ -4,6 +4,9 @@ import com.maslov.securityhomework.domain.Book;
 import com.maslov.securityhomework.domain.Comment;
 import com.maslov.securityhomework.model.BookModel;
 import com.maslov.securityhomework.service.BookService;
+import org.springframework.boot.Banner;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(produces = "application/json")
+@Controller
+@RequestMapping()
 public class BookController {
     private final BookService bookService;
 
@@ -25,9 +28,12 @@ public class BookController {
         this.bookService = service;
     }
 
-    @GetMapping("books")
-    public List<Book> list() {
-        return bookService.getAllBook();
+    @GetMapping
+    public String list(Model model) {
+        Iterable<Book> books = bookService.getAllBook();
+
+        model.addAttribute("books", books);
+        return "index";
     }
 
     @GetMapping("books/onebook")
@@ -40,9 +46,14 @@ public class BookController {
         return bookService.getComments(bookId);
     }
 
-    @PostMapping("books")
-    public Book createBook(@RequestBody BookModel book) {
-        return bookService.createBook(book);
+    // TODO add some request params and reate book
+    @PostMapping("createBook")
+    public String createBook(@RequestParam String name, Model model) {
+//        bookService.createBook(book);
+
+        List<Book> books = bookService.getAllBook();
+        model.addAttribute("books", books);
+        return "index";
     }
 
     @PutMapping("books/{id}")

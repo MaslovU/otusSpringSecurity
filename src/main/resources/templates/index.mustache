@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RestApplic</title>
+</head>
+<body>
+    <h3>Books</h3>
+    <div>
+        <form method="post" action="createBook">
+            <label>
+                <input type="text" name="name" placeholder="Input name of book">
+            </label>
+            <label>
+                <input type="text" name="authors" placeholder="Input authors">
+            </label>
+            <label>
+                <input type="text" name="year" placeholder="Input year of publish">
+            </label>
+            <label>
+                <input type="text" name="genre" placeholder="Input genre of book">
+            </label>
+            <label>
+                <input type="text" name="listOfComments" placeholder="Input comments">
+            </label>
+            <button type="submit">Save book</button>
+        </form>
+    </div>
+    <div>List of books</div>
+    {{#books}}
+        <div>
+            <b>{{book.id}}</b>
+            <span>{{book.name}}</span>
+        </div>
+    {{/books}}
+</body>
+</html>
