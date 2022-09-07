@@ -23,6 +23,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "comment_book", nullable = false, unique = true)
+    @Column(name = "comment_book", nullable = false)
     private String commentForBook;
 }
