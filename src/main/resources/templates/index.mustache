@@ -29,8 +29,16 @@
     <div>List of books</div>
     {{#books}}
         <div>
-            <b>{{book.id}}</b>
-            <span>{{book.name}}</span>
+            <b>{{id}}</b>
+            <span>{{name}}</span>
+            <span>{{#authors}}
+                    {{name}}
+                  {{/authors}}</span>
+            <span>{{year.getDateOfPublish}}</span>
+            <span>{{genre.getName}}</span>
+            <span>{{#listOfComments}}
+                    {{commentForBook}}
+                  {{/listOfComments}}</span>
         </div>
     {{/books}}
 </body>

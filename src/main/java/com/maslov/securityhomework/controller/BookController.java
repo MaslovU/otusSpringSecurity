@@ -1,5 +1,6 @@
 package com.maslov.securityhomework.controller;
 
+import com.maslov.securityhomework.domain.Author;
 import com.maslov.securityhomework.domain.Book;
 import com.maslov.securityhomework.domain.Comment;
 import com.maslov.securityhomework.model.BookModel;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -46,10 +49,24 @@ public class BookController {
         return bookService.getComments(bookId);
     }
 
-    // TODO add some request params and reate book
     @PostMapping("createBook")
-    public String createBook(@RequestParam String name, Model model) {
-//        bookService.createBook(book);
+    public String createBook(Model model,
+                             @RequestParam String name,
+                             @RequestParam String authors,
+                             @RequestParam String genre,
+                             @RequestParam String year,
+                             @RequestParam String listOfComments) {
+        List<String> listOfAuthors = new ArrayList<>(Arrays.asList(authors.split(",")));
+        List<String> comments = new ArrayList<>(Arrays.asList(listOfComments.split(",")));
+        BookModel book = BookModel.builder()
+                .name(name)
+                .authors(listOfAuthors)
+                .genre(genre)
+                .year(year)
+                .listOfComments(comments)
+                .build();
+
+        bookService.createBook(book);
 
         List<Book> books = bookService.getAllBook();
         model.addAttribute("books", books);
