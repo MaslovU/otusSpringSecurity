@@ -13,7 +13,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class BookDataProvider {
-
     private final BookRepo bookRepo;
 
     public Book getBook(long id) {

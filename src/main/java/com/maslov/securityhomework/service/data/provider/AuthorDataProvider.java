@@ -12,7 +12,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthorDataProvider {
-
     private final AuthorRepo authorRepo;
 
     public List<Author> findByName(String name) {

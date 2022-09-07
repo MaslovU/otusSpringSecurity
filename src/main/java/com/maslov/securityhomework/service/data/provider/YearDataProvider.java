@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class YearDataProvider {
-
     private final YearRepo yearRepo;
 
     public YearOfPublish create(YearOfPublish yearOfPublish) {

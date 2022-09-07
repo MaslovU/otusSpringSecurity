@@ -27,7 +27,6 @@ import static java.util.Objects.isNull;
 @Slf4j
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-
     private final BookDataProvider bookDataProvider;
     private final YearDataProvider yearDataProvider;
     private final GenreDataProvider genreDataProvider;

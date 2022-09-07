@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class GenreDataProvider {
-
     private final GenreRepo genreRepo;
 
     public Genre findByName(String name) {

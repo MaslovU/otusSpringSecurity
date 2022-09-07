@@ -19,7 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping(produces = "application/json")
 public class BookController {
-
     private final BookService bookService;
 
     public BookController(BookService service) {

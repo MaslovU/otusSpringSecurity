@@ -1,7 +1,6 @@
 package com.maslov.securityhomework.domain;
 
 public final class Views {
-
     interface Id {
     }
 

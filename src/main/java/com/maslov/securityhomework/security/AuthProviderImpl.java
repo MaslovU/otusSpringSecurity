@@ -15,7 +15,6 @@ import static java.util.Objects.isNull;
 
 @Component
 public class AuthProviderImpl implements AuthenticationProvider {
-
     @Autowired
     private UserDetailsRepo repo;
 

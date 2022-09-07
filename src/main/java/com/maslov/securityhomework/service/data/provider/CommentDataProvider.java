@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class CommentDataProvider {
-
     private final CommentRepo commentRepo;
 
     public Comment create(Comment comment) {
