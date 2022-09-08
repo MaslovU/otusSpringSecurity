@@ -88,12 +88,13 @@ public class BookController {
     }
 
     @GetMapping("delete")
-    public String delEmployee(Model model) {
-        return "delete";
+    public String delEmployee(@RequestParam Long id, Model model) {
+        bookService.delBook(id);
+        return "redirect:/main";
     }
 
-    @DeleteMapping("books/{id}")
-    public void delEmployee(@PathVariable Long id) {
-        bookService.delBook(id);
+    @GetMapping("delete-book")
+    public String delEmployee() {
+        return "delete";
     }
 }

@@ -13,6 +13,11 @@
         </form>
     </div>
     <div>
+        <form action="/delete-book" method="get">
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+    <div>
         <form method="post" action="createBook">
             <label>
                 <input type="text" name="name" placeholder="Input name of book">
@@ -57,11 +62,6 @@
             <span style="position: absolute; right: 900px">
                  <form action="/edit" method="get">
                     <input type="submit" value="Edit"/>
-                </form>
-            </span>
-            <span style="position: absolute; right: 800px">
-                <form action="/delete" method="get">
-                    <input type="submit" value="Delete"/>
                 </form>
             </span>
         </div>
