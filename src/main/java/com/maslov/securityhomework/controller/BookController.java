@@ -5,6 +5,7 @@ import com.maslov.securityhomework.domain.Comment;
 import com.maslov.securityhomework.model.BookModel;
 import com.maslov.securityhomework.service.BookService;
 import org.springframework.boot.Banner;
+import org.springframework.jdbc.core.SqlReturnType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,8 +60,8 @@ public class BookController {
                              @RequestParam String genre,
                              @RequestParam String year,
                              @RequestParam String listOfComments) {
-        List<String> listOfAuthors = new ArrayList<>(Arrays.asList(authors.split(",")));
-        List<String> comments = new ArrayList<>(Arrays.asList(listOfComments.split(",")));
+        List<String> listOfAuthors = parseAuthors(authors);
+        List<String> comments = parseComments(listOfComments);
         BookModel book = BookModel.builder()
                 .name(name)
                 .authors(listOfAuthors)
@@ -77,14 +78,28 @@ public class BookController {
     }
 
     @GetMapping("edit")
-    public String updateBook(Model model) {
+    public String updateBook() {
         return "edit";
     }
 
-    @PutMapping("books/{id}")
-    public Book updateBook(@PathVariable("id") Book bookFromDB,
-                           @RequestBody BookModel bookModel) {
-        return bookService.updateBook(bookModel, bookFromDB);
+    @PostMapping("editBook")
+    public Book updateBook(Model model,
+                           @RequestParam String id,
+                           @RequestParam String name,
+                           @RequestParam String authors,
+                           @RequestParam String genre,
+                           @RequestParam String year,
+                           @RequestParam String listOfComments) {
+        List<String> listOfAuthors = parseAuthors(authors);
+        List<String> comments = parseComments(listOfComments);
+        BookModel book = BookModel.builder()
+                .name(name)
+                .authors(listOfAuthors)
+                .genre(genre)
+                .year(year)
+                .listOfComments(comments)
+                .build();
+        return bookService.updateBook(id, book);
     }
 
     @GetMapping("delete")
@@ -96,5 +111,13 @@ public class BookController {
     @GetMapping("delete-book")
     public String delEmployee() {
         return "delete";
+    }
+
+    private List<String> parseAuthors(String authors) {
+        return new ArrayList<>(Arrays.asList(authors.split(",")));
+    }
+
+    private List<String> parseComments(String listOfComments) {
+        return new ArrayList<>(Arrays.asList(listOfComments.split(",")));
     }
 }

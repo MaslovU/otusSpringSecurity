@@ -38,33 +38,45 @@
             <button type="submit">Save book</button>
         </form>
     </div>
+    <br/><br/>
     <div>List of books</div>
-    {{#books}}
-        <div>
-            <b>{{id}}</b>
-            <span>{{name}}</span>
-            <span>
-                {{#authors}}
-                    {{name}}
-                {{/authors}}
-            </span>
-            <span>
-                {{year.getDateOfPublish}}
-            </span>
-            <span>
-                {{genre.getName}}
-            </span>
-            <span>
-                {{#listOfComments}}
-                    {{commentForBook}}
-                {{/listOfComments}}
-            </span>
-            <span style="position: absolute; right: 900px">
-                 <form action="/edit" method="get">
-                    <input type="submit" value="Edit"/>
-                </form>
-            </span>
-        </div>
-    {{/books}}
+    <div>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Name of book</th>
+                <th>Authors</th>
+                <th>DateOfPublish</th>
+                <th>Genre</th>
+                <th>List Of Comments</th>
+                <th>Edit</th>
+            </tr>
+            {{#books}}
+                <tr>
+                <div>
+                    <td><b>{{id}}</b></td>
+                    <td>{{name}}</td>
+                    <td><span>
+                        {{#authors}}
+                            {{name}}
+                        {{/authors}}
+                    </span></td>
+                    <td><span>
+                        {{year.getDateOfPublish}}
+                    </span></td>
+                    <td><span>
+                        {{genre.getName}}
+                    </span></td>
+                    <td><span>
+                        {{#listOfComments}}
+                            {{commentForBook}}
+                        {{/listOfComments}}
+                    </span></td>
+                    <td><a href="edit" >Edit</a></td>
+                </div>
+                </tr>
+            {{/books}}
+        </table>
+    </div>
 </body>
 </html>

@@ -107,7 +107,7 @@ class BookServiceImplTest {
 
         when(bookDataProvider.getBook(5L)).thenReturn(Book.builder().name(TEST).build());
 
-        service.updateBook(bookModel, bookFromDB);
+        service.updateBook("1", bookModel);
 
         verify(bookDataProvider, Mockito.times(1)).createBook(any());
     }

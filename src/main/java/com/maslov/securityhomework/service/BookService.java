@@ -13,7 +13,7 @@ public interface BookService {
 
     Book createBook(BookModel bookModel);
 
-    Book updateBook(BookModel bookModel, Book boorFromDB);
+    Book updateBook(String id, BookModel book);
 
     void delBook(long id);
 

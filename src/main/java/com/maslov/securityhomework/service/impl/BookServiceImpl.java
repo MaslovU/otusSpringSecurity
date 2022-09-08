@@ -63,9 +63,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book updateBook(BookModel bookModel, Book bookFromDB) {
+    public Book updateBook(String id, BookModel book) {
         log.debug("Start updating book");
-        return makeFromModelToBook(bookModel, bookFromDB);
+        Book bookFromDB = bookDataProvider.getBook(Long.parseLong(id));
+        return makeFromModelToBook(book, bookFromDB);
     }
 
     @Override
