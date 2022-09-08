@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 @Slf4j
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final DataSource dataSource;
 
     @Override
