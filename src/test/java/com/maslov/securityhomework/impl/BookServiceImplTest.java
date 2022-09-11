@@ -1,6 +1,10 @@
 package com.maslov.securityhomework.impl;
 
+import com.maslov.securityhomework.domain.Author;
 import com.maslov.securityhomework.domain.Book;
+import com.maslov.securityhomework.domain.Comment;
+import com.maslov.securityhomework.domain.Genre;
+import com.maslov.securityhomework.domain.YearOfPublish;
 import com.maslov.securityhomework.exception.MaslovBookException;
 import com.maslov.securityhomework.model.BookModel;
 import com.maslov.securityhomework.service.BookService;
@@ -101,13 +105,18 @@ class BookServiceImplTest {
         authorsList.add("lafore");
         List<String> commentsList = new ArrayList<>();
         commentsList.add("first");
+        List<Author> authors = new ArrayList<>();
+        authors.add(new Author());
+        List<Comment> comments = new ArrayList<>();
 
-        Book bookFromDB = new Book();
-        BookModel bookModel = BookModel.builder().name(TEST).authors(authorsList).genre("study").listOfComments(commentsList).year("2022").build();
+        BookModel bookModel = BookModel.builder().name(TEST).authors(authorsList).genre("study")
+                .listOfComments(commentsList).year("2022").build();
+        Book book = Book.builder().id(5L).name(TEST).authors(authors).genre(new Genre(1, "study"))
+                .listOfComments(comments).year(new YearOfPublish(1, "2022")).build();
 
-        when(bookDataProvider.getBook(5L)).thenReturn(Book.builder().name(TEST).build());
+        when(bookDataProvider.getBook(5L)).thenReturn(book);
 
-        service.updateBook("1", bookModel);
+        service.updateBook("5", bookModel);
 
         verify(bookDataProvider, Mockito.times(1)).createBook(any());
     }
