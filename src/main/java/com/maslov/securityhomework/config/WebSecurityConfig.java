@@ -1,6 +1,5 @@
 package com.maslov.securityhomework.config;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,24 +13,27 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @Slf4j
-@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
 
+    public WebSecurityConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf()
+                .csrf()
                 .disable()
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/registration").permitAll()
                 .anyRequest().authenticated()
-            .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-            .and()
+                .and()
                 .logout()
                 .permitAll();
     }
@@ -39,10 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .passwordEncoder(NoOpPasswordEncoder.getInstance())
-            .usersByUsernameQuery("select name, password, active from usr where name=?")
-            .authoritiesByUsernameQuery("select u.name, ur.roles from usr u inner join user_role ur " +
-                    "on u.id = ur.user_id where u.name=?");
+                .dataSource(dataSource)
+                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .usersByUsernameQuery("select name, password, active from usr where name=?")
+                .authoritiesByUsernameQuery("select u.name, ur.roles from usr u inner join user_role ur " +
+                        "on u.id = ur.user_id where u.name=?");
     }
 }
