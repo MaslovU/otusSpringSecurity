@@ -1,7 +1,7 @@
 package com.maslov.securityhomework.controller;
 
 import com.maslov.securityhomework.domain.Role;
-import com.maslov.securityhomework.domain.User;
+import com.maslov.securityhomework.domain.MyUser;
 import com.maslov.securityhomework.model.UserDo;
 import com.maslov.securityhomework.service.data.provider.UserDataProvider;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(UserDo user, Model model) {
-        User userFromDb = userDataProvider.findByName(user.getName());
+        MyUser userFromDb = userDataProvider.findByName(user.getName());
 
         if (nonNull(userFromDb)) {
             model.addAttribute("message", "User exists!");

@@ -15,12 +15,6 @@ import javax.sql.DataSource;
 @Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
-
-    public WebSecurityConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -36,16 +30,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //TODO implement in UserService
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select name, password, active from usr where name=?")
-                .authoritiesByUsernameQuery("select u.name, ur.roles from usr u inner join user_role ur " +
-                        "on u.id = ur.user_id where u.name=?");
     }
 }
