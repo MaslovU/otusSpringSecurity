@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RestApplic</title>
+</head>
+<body>
+    <h3>Books</h3>
+    <div>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div>
+        <form action="/delete-book" method="get">
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+    <div>
+        <form method="post" action="createBook">
+            <label>
+                <input type="text" name="name" placeholder="Input name of book">
+            </label>
+            <label>
+                <input type="text" name="authors" placeholder="Input authors">
+            </label>
+            <label>
+                <input type="text" name="year" placeholder="Input year of publish">
+            </label>
+            <label>
+                <input type="text" name="genre" placeholder="Input genre of book">
+            </label>
+            <label>
+                <input type="text" name="listOfComments" placeholder="Input comments">
+            </label>
+            <button type="submit">Save book</button>
+        </form>
+    </div>
+    <br/><br/>
+    <div>List of books</div>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Name of book</th>
+                <th>Authors</th>
+                <th>DateOfPublish</th>
+                <th>Genre</th>
+                <th>List Of Comments</th>
+                <th>Edit</th>
+            </tr>
+            {{#books}}
+                <tr>
+                <div>
+                    <td><b>{{id}}</b></td>
+                    <td>{{name}}</td>
+                    <td><span>
+                        {{#authors}}
+                            {{name}}
+                        {{/authors}}
+                    </span></td>
+                    <td><span>
+                        {{year.getDateOfPublish}}
+                    </span></td>
+                    <td><span>
+                        {{genre.getName}}
+                    </span></td>
+                    <td><span>
+                        {{#listOfComments}}
+                            {{commentForBook}}
+                        {{/listOfComments}}
+                    </span></td>
+                    <td><a href="edit" >Edit</a></td>
+                </div>
+                </tr>
+            {{/books}}
+        </table>
+    </div>
+</body>
+</html>
