@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
         if (user == null) throw new UsernameNotFoundException(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.name()));
         }
 
         return new User(user.getName(), encoder.encode(user.getPassword()), grantedAuthorities);

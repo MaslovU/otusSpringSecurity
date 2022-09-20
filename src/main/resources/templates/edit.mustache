@@ -8,7 +8,6 @@
 <h3>Books</h3>
 <div>
     <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
         <input type="submit" value="Sign Out"/>
     </form>
 </div>
@@ -33,7 +32,6 @@
         <label>
             <input type="text" name="listOfComments" placeholder="Input comments">
         </label>
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
         <button type="submit">Save change</button>
     </form>
 </div>
