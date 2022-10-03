@@ -1,6 +1,6 @@
 package com.maslov.securityhomework.service.data.provider;
 
-import com.maslov.securityhomework.domain.User;
+import com.maslov.securityhomework.domain.MyUser;
 import com.maslov.securityhomework.model.UserDo;
 import com.maslov.securityhomework.repository.UserDetailsRepo;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class UserDataProvider {
     private final UserDetailsRepo userRepo;
 
-    public User findByName(String name) {
+    public MyUser findByName(String name) {
         return userRepo.findByName(name);
     }
 
-    public User createUser(UserDo userDo) {
-        User user = new User();
+    public MyUser createUser(UserDo userDo) {
+        MyUser user = new MyUser();
         user.setName(userDo.getName());
         user.setPassword(userDo.getPassword());
         user.setActive(userDo.isActive());
